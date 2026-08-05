@@ -1,18 +1,33 @@
 import { apiClient } from '@/lib/axios';
 import { API_ENDPOINTS } from '@/api/endpoints';
-import { User } from '@/types/user';
+import type { User } from '@/types/user';
 
 export const userService = {
-  async getUsers(params?: { page?: number; limit?: number; search?: string }) {
+  async getUsers(options?: {
+    params?: {
+      page?: number;
+      limit?: number;
+      search?: string;
+    };
+    signal?: AbortSignal;
+  }) {
     const response = await apiClient.get<User[]>(API_ENDPOINTS.USERS.LIST, {
-      params,
+      params: options?.params,
+      signal: options?.signal,
     });
 
     return response.data;
   },
 
-  async getUser(id: string) {
-    const response = await apiClient.get<User>(API_ENDPOINTS.USERS.DETAIL(id));
+  async getUser(
+    id: string,
+    options?: {
+      signal?: AbortSignal;
+    },
+  ) {
+    const response = await apiClient.get<User>(API_ENDPOINTS.USERS.DETAIL(id), {
+      signal: options?.signal,
+    });
 
     return response.data;
   },

@@ -1,6 +1,11 @@
 export const QUERY_KEYS = {
   USERS: {
-    LIST: ['users'] as const,
-    DETAIL: (id: string) => ['users', id] as const,
+    ALL: ['users'],
+
+    LIST: (params?: { page?: number; limit?: number; search?: string }) => [
+      'users',
+      'list',
+      params,
+    ],
   },
-} as const;
+};
