@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { QueryProvider } from '@/providers/query-provider';
 import { MSWProvider } from '@/providers/msw-provider';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,14 +26,16 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full font-sans antialiased`}
     >
       <body className="flex min-h-full flex-col">
-        <MSWProvider>
-          <QueryProvider>
-            <ThemeProvider>{children}</ThemeProvider>
-          </QueryProvider>
-        </MSWProvider>
+        <TooltipProvider>
+          <MSWProvider>
+            <QueryProvider>
+              <ThemeProvider>{children}</ThemeProvider>
+            </QueryProvider>
+          </MSWProvider>
+        </TooltipProvider>
       </body>
     </html>
   );
