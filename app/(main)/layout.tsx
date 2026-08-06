@@ -1,3 +1,4 @@
+import Header from '@/components/common/layout/Header';
 import MainNav from '@/components/common/layout/MainNav';
 import { SidebarProvider } from '@/components/ui/sidebar';
 
@@ -6,7 +7,10 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex min-h-full w-auto">
       <SidebarProvider>
         <MainNav />
-        {children}
+        <div className="w-full">
+          <Header />
+          {children}
+        </div>
       </SidebarProvider>
     </div>
   );
