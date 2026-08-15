@@ -1,5 +1,11 @@
+import PageHeader from '@/components/common/PageHeader';
+
 const MainPage = () => {
-  return <div>main page</div>;
+  return (
+    <div className="flex w-full flex-col">
+      <PageHeader />
+    </div>
+  );
 };
 
 export default MainPage;

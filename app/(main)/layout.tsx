@@ -8,7 +8,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex min-h-full w-auto">
       <SidebarProvider>
         <MainNav />
-        <div className="w-full">
+        <div className="w-full pr-4">
           <Header />
           <CBreadCrumb />
           {children}
