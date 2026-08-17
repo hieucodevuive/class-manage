@@ -10,3 +10,9 @@ export interface ISidebarGroup {
   label: string;
   items: ISidebarItem[];
 }
+
+export enum ModuleType {
+  STUDENT,
+  CLASS,
+  PAYMENT,
+}

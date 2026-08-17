@@ -15,7 +15,7 @@ import {
   SidebarMenuItem,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-import { sidebarConfig } from '@/configs/sidebar';
+import { sidebarConfig } from '@/configs';
 import { BrainCircuit } from 'lucide-react';
 
 const MainNav = () => {

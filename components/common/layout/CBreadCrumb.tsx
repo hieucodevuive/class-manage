@@ -5,7 +5,7 @@ import { Fragment } from 'react';
 import { Home } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
-import { breadcrumbMap } from '@/configs/breadcrumb';
+import { breadcrumbMap } from '@/configs';
 
 import {
   Breadcrumb,
