@@ -1,5 +1,6 @@
 import { ModuleType } from '@/types';
 import { mainColor } from '@/configs';
+import CardItem from './CardItem';
 
 interface QuickActionProps {
   href: string;
@@ -15,17 +16,16 @@ export default function QuickAction({
   moduleType = ModuleType.STUDENT,
 }: QuickActionProps) {
   return (
-    <a
-      href={href}
-      className="flex w-50 min-w-20 items-center rounded-xl border p-4 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
-    >
-      <div
-        className={`flex h-8 w-8 items-center justify-center ${mainColor[moduleType]} rounded-lg bg-blue-50`}
-      >
-        {icon}
-      </div>
+    <CardItem canHover className="min-w-70">
+      <a href={href} className="flex items-center">
+        <div
+          className={`flex h-8 w-8 items-center justify-center ${mainColor[moduleType].text} ${mainColor[moduleType].background} rounded-lg bg-blue-50`}
+        >
+          {icon}
+        </div>
 
-      <span className="ml-2 text-sm">{text}</span>
-    </a>
+        <span className="ml-2 text-sm">{text}</span>
+      </a>
+    </CardItem>
   );
 }

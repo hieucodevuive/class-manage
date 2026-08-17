@@ -4,10 +4,21 @@ import type { ISidebarGroup } from '@/types';
 import { ModuleType } from '@/types';
 
 export const mainColor = {
-  [ModuleType.STUDENT]: 'text-blue-500',
-  [ModuleType.CLASS]: 'text-green-500',
-  [ModuleType.PAYMENT]: 'text-purple-500',
-};
+  [ModuleType.STUDENT]: {
+    text: 'text-blue-600',
+    background: 'bg-blue-50',
+  },
+
+  [ModuleType.CLASS]: {
+    text: 'text-green-600',
+    background: 'bg-green-50',
+  },
+
+  [ModuleType.PAYMENT]: {
+    text: 'text-purple-600',
+    background: 'bg-purple-50',
+  },
+} as const;
 
 // configs/breadcrumb.ts
 export const breadcrumbMap: Record<string, string> = {
