@@ -1,3 +1,5 @@
+import RevenueChart from '@/components/common/dashboard/RevenueChart';
+import StudentsByClassChart from '@/components/common/dashboard/StudentsByClassChart';
 import PageHeader from '@/components/common/PageHeader';
 import QuickAction from '@/components/common/QuickAction';
 import StatCard from '@/components/common/StatCard';
@@ -29,6 +31,30 @@ const quickActions = [
     icon: <CreditCard className="h-5 w-5" />,
     moduleType: ModuleType.PAYMENT,
   },
+];
+
+const revenueData = [
+  { month: 'Tháng 1', revenue: 18500000 },
+  { month: 'Tháng 2', revenue: 22000000 },
+  { month: 'Tháng 3', revenue: 19800000 },
+  { month: 'Tháng 4', revenue: 26500000 },
+  { month: 'Tháng 5', revenue: 28900000 },
+  { month: 'Tháng 6', revenue: 31500000 },
+  { month: 'Tháng 7', revenue: 30200000 },
+  { month: 'Tháng 8', revenue: 34800000 },
+  { month: 'Tháng 9', revenue: 34800000 },
+  { month: 'Tháng 10', revenue: 34800000 },
+  { month: 'Tháng 11', revenue: 34800000 },
+  { month: 'Tháng 12', revenue: 34800000 },
+];
+
+const studentsByClassData = [
+  { className: '10A1', students: 28 },
+  { className: '10A2', students: 24 },
+  { className: '11A1', students: 22 },
+  { className: '11A2', students: 26 },
+  { className: '12A1', students: 30 },
+  { className: '12A2', students: 25 },
 ];
 
 const MainPage = () => {
@@ -79,6 +105,9 @@ const MainPage = () => {
           description="Từ tháng trước"
         />
       </div>
+
+      <RevenueChart data={revenueData} />
+      <StudentsByClassChart data={studentsByClassData} />
     </div>
   );
 };
