@@ -60,7 +60,11 @@ const studentsByClassData = [
 const MainPage = () => {
   return (
     <div className="flex w-full flex-col gap-2">
-      <PageHeader />
+      <PageHeader
+        title="Thống kê"
+        subTitle="Chào mừng bạn trở lại, hãy xem số liệu ngày hôm nay!"
+        moduleType={ModuleType.Dashboard}
+      />
 
       <div className="flex flex-wrap gap-4">
         {quickActions.map((action) => (

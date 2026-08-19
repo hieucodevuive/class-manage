@@ -15,4 +15,5 @@ export enum ModuleType {
   STUDENT,
   CLASS,
   PAYMENT,
+  DASHBOARD,
 }

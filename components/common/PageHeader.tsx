@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { FileSpreadsheet } from 'lucide-react';
+import { FileSpreadsheet, UserPlus } from 'lucide-react';
 
 import CButton from './CButton';
 import { CSelect } from './CSelect';
+import { ModuleType } from '@/types';
 
 const times = [
   { label: '30 ngày', value: '1' },
@@ -12,7 +13,17 @@ const times = [
   { label: '1 năm', value: '3' },
 ];
 
-export default function PageHeader() {
+interface IPageHeader {
+  title: string;
+  subTitle: string;
+  moduleType?: ModuleType;
+}
+
+export default function PageHeader({
+  title,
+  subTitle,
+  moduleType,
+}: IPageHeader) {
   const [time, setTime] = useState<string | null>('1');
 
   const handleTimeChange = (value: string | null) => {
@@ -24,22 +35,24 @@ export default function PageHeader() {
   return (
     <div className="flex h-18 w-full items-center justify-between">
       <div className="flex flex-col">
-        <h2 className="text-xl font-semibold text-black">Thống kê</h2>
+        <h2 className="text-xl font-semibold text-black">{title}</h2>
 
-        <span className="text-muted-foreground text-sm">
-          Chào mừng bạn trở lại, hãy xem số liệu ngày hôm nay!
-        </span>
+        <span className="text-muted-foreground text-sm">{subTitle}</span>
       </div>
 
       <div className="flex items-center gap-2">
-        <CSelect
-          items={times}
-          value={time}
-          onValueChange={handleTimeChange}
-          className="w-32"
-        />
-
+        {moduleType === ModuleType.DASHBOARD && (
+          <CSelect
+            items={times}
+            value={time ?? ''}
+            onValueChange={handleTimeChange}
+            className="w-32"
+          />
+        )}
         <CButton text="Tạo file Excel" icon={<FileSpreadsheet />} />
+        {moduleType !== ModuleType.DASHBOARD && (
+          <CButton text="Thêm học sinh" icon={<UserPlus />} />
+        )}
       </div>
     </div>
   );
