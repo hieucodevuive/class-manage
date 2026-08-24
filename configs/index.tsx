@@ -18,6 +18,10 @@ export const mainColor = {
     text: 'text-purple-600',
     background: 'bg-purple-50',
   },
+  [ModuleType.DASHBOARD]: {
+    text: 'text-slate-600',
+    background: 'bg-slate-50',
+  },
 } as const;
 
 // configs/breadcrumb.ts

@@ -1,4 +1,5 @@
 import PageHeader from '@/components/common/PageHeader';
+import DataTable from '@/components/common/table';
 import { ModuleType } from '@/types';
 
 const StudentsPage = () => {
@@ -9,6 +10,7 @@ const StudentsPage = () => {
         subTitle="Quản lý học sinh của trung tâm"
         moduleType={ModuleType.STUDENT}
       />
+      <DataTable moduleType={ModuleType.STUDENT} />
     </div>
   );
 };

@@ -12,8 +12,27 @@ export interface ISidebarGroup {
 }
 
 export enum ModuleType {
-  STUDENT,
-  CLASS,
-  PAYMENT,
-  DASHBOARD,
+  STUDENT = 'STUDENT',
+  CLASS = 'CLASS',
+  PAYMENT = 'PAYMENT',
+  DASHBOARD = 'DASHBOARD',
+}
+
+export type StudentStatus = 'ACTIVE' | 'INACTIVE';
+export interface IStudent {
+  id: string;
+  name: string;
+
+  // Thông tin học sinh ở trường
+  school: string;
+  grade: number;
+
+  // Thông tin phụ huynh
+  parentName: string;
+  parentPhone: string;
+
+  // Lớp học tại trung tâm
+  classId: string;
+
+  status: StudentStatus;
 }

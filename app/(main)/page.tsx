@@ -63,7 +63,7 @@ const MainPage = () => {
       <PageHeader
         title="Thống kê"
         subTitle="Chào mừng bạn trở lại, hãy xem số liệu ngày hôm nay!"
-        moduleType={ModuleType.Dashboard}
+        moduleType={ModuleType.DASHBOARD}
       />
 
       <div className="flex flex-wrap gap-4">
