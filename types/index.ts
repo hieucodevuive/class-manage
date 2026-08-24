@@ -29,7 +29,7 @@ export interface IStudent {
 
   // Thông tin phụ huynh
   parentName: string;
-  parentPhone: string;
+  phone: string;
 
   // Lớp học tại trung tâm
   classId: string;

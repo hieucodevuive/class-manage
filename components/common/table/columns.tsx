@@ -7,12 +7,12 @@ import DataTableActions from './DataTableActions';
 export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
   {
     accessorKey: 'name',
-    header: 'Tên học sinh',
+    header: 'Tên',
   },
 
   {
     accessorKey: 'classId',
-    header: 'Lớp học',
+    header: 'Lớp',
   },
 
   {
@@ -31,8 +31,8 @@ export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
   },
 
   {
-    accessorKey: 'parentPhone',
-    header: 'Số điện thoại',
+    accessorKey: 'phone',
+    header: 'SDT',
   },
 
   {

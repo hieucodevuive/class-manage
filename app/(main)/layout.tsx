@@ -5,10 +5,10 @@ import { SidebarProvider } from '@/components/ui/sidebar';
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-full w-auto">
+    <div className="flex min-h-full w-screen">
       <SidebarProvider>
         <MainNav />
-        <div className="w-full pr-4">
+        <div className="flex-1 overflow-hidden pr-4 pb-4">
           <Header />
           <CBreadCrumb />
           {children}

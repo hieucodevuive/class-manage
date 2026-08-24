@@ -31,7 +31,7 @@ const MainNav = () => {
           <div className="flex flex-col">
             <h3 className="truncate text-sm font-bold">Quản lý lớp học</h3>
             <span className="text-muted-foreground truncate text-xs">
-              GV Phạm Thị Ngọc Trang
+              GV Ngọc Trang
             </span>
           </div>
         </SidebarHeader>

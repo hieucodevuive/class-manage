@@ -20,7 +20,7 @@ export const students: IStudent[] = [
     school: 'THPT Phủ Thông',
     grade: 10,
     parentName: 'Nguyễn Văn Hùng',
-    parentPhone: '0912345678',
+    phone: '0912345678',
     status: 'ACTIVE',
   },
   {
@@ -30,7 +30,7 @@ export const students: IStudent[] = [
     school: 'THPT Phủ Thông',
     grade: 10,
     parentName: 'Trần Văn Minh',
-    parentPhone: '0987654321',
+    phone: '0987654321',
     status: 'ACTIVE',
   },
   {
@@ -40,7 +40,7 @@ export const students: IStudent[] = [
     school: 'THPT Phủ Thông',
     grade: 11,
     parentName: 'Lê Văn Thành',
-    parentPhone: '0901234567',
+    phone: '0901234567',
     status: 'ACTIVE',
   },
   {
@@ -50,7 +50,7 @@ export const students: IStudent[] = [
     school: 'THPT Phủ Thông',
     grade: 11,
     parentName: 'Phạm Văn Đức',
-    parentPhone: '0934567890',
+    phone: '0934567890',
     status: 'INACTIVE',
   },
   {
@@ -60,7 +60,7 @@ export const students: IStudent[] = [
     school: 'THPT Bắc Kạn',
     grade: 12,
     parentName: 'Đỗ Văn Nam',
-    parentPhone: '0961234567',
+    phone: '0961234567',
     status: 'ACTIVE',
   },
   {
@@ -70,7 +70,7 @@ export const students: IStudent[] = [
     school: 'THPT Bắc Kạn',
     grade: 12,
     parentName: 'Vũ Văn Hoàng',
-    parentPhone: '0978123456',
+    phone: '0978123456',
     status: 'ACTIVE',
   },
   {
@@ -80,7 +80,7 @@ export const students: IStudent[] = [
     school: 'THPT Phủ Thông',
     grade: 10,
     parentName: 'Nguyễn Văn Long',
-    parentPhone: '0908765432',
+    phone: '0908765432',
     status: 'ACTIVE',
   },
   {
@@ -90,7 +90,7 @@ export const students: IStudent[] = [
     school: 'THPT Phủ Thông',
     grade: 11,
     parentName: 'Hoàng Văn Bình',
-    parentPhone: '0918765432',
+    phone: '0918765432',
     status: 'INACTIVE',
   },
   {
@@ -100,7 +100,7 @@ export const students: IStudent[] = [
     school: 'THPT Bắc Kạn',
     grade: 12,
     parentName: 'Bùi Văn Nam',
-    parentPhone: '0945678123',
+    phone: '0945678123',
     status: 'ACTIVE',
   },
   {
@@ -110,7 +110,7 @@ export const students: IStudent[] = [
     school: 'THPT Phủ Thông',
     grade: 10,
     parentName: 'Phan Văn Hùng',
-    parentPhone: '0981234567',
+    phone: '0981234567',
     status: 'ACTIVE',
   },
 ];
@@ -148,39 +148,69 @@ export default function DataTable({ moduleType }: IDataTable) {
     getRowId: (row) => row.id,
   });
   return (
-    <>
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder ? null : (
-                    <table.FlexRender header={header} />
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getAllCells().map((cell) => (
-                <td key={cell.id}>
-                  <table.FlexRender cell={cell} />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="flex items-center justify-between py-4">
-        <span className="text-muted-foreground text-sm">
-          Trang {pagination.pageIndex + 1}
-        </span>
+    <div className="bg-background w-full overflow-hidden rounded-xl border">
+      {/* Table */}
+      <div className="w-full max-w-full overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-muted/40">
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id} className="border-b transition-colors">
+                {headerGroup.headers.map((header) => (
+                  <th
+                    key={header.id}
+                    className="text-muted-foreground h-11 px-4 text-left align-middle font-medium whitespace-nowrap"
+                  >
+                    {header.isPlaceholder ? null : (
+                      <table.FlexRender header={header} />
+                    )}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
 
-        <div className="flex gap-2">
+          <tbody>
+            {table.getRowModel().rows.length > 0 ? (
+              table.getRowModel().rows.map((row) => (
+                <tr
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
+                  className="hover:bg-muted/30 data-[state=selected]:bg-muted/50 border-b transition-colors"
+                >
+                  {row.getAllCells().map((cell) => (
+                    <td
+                      key={cell.id}
+                      className="px-4 py-3 align-middle whitespace-nowrap"
+                    >
+                      <table.FlexRender cell={cell} />
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={columns.length}
+                  className="text-muted-foreground h-32 text-center"
+                >
+                  Không có dữ liệu.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination */}
+      <div className="bg-background flex w-full items-center justify-between border-t px-4 py-3">
+        <div className="text-muted-foreground text-sm">
+          Trang{' '}
+          <span className="text-foreground font-medium">
+            {pagination.pageIndex + 1}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -200,6 +230,6 @@ export default function DataTable({ moduleType }: IDataTable) {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Layers, CreditCard } from 'lucide-react';
+import { LayoutDashboard, Users, School, CreditCard } from 'lucide-react';
 import type { ISidebarGroup } from '@/types';
 
 import { ModuleType } from '@/types';
@@ -60,7 +60,7 @@ export const sidebarConfig: ISidebarGroup[] = [
       {
         title: 'Lớp học',
         href: '/classes',
-        icon: Layers,
+        icon: School,
       },
     ],
   },

@@ -3,7 +3,7 @@ import { SearchInput } from '../SearchInput';
 
 const Header = () => {
   return (
-    <header className="flex h-15.5 items-center justify-between gap-2 px-4">
+    <header className="flex h-15.5 items-center justify-between gap-2">
       <SearchInput />
       <AvatarMenu />
     </header>

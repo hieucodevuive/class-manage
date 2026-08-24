@@ -4,7 +4,7 @@ import { ModuleType } from '@/types';
 
 const StudentsPage = () => {
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full min-w-0 flex-col gap-2">
       <PageHeader
         title="Học sinh"
         subTitle="Quản lý học sinh của trung tâm"
