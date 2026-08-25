@@ -8,6 +8,7 @@ export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
   {
     accessorKey: 'name',
     header: 'Tên',
+    sortFn: 'alphanumeric',
   },
 
   {
@@ -18,6 +19,7 @@ export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
   {
     accessorKey: 'school',
     header: 'Trường',
+    enableSorting: false,
   },
 
   {
@@ -33,11 +35,13 @@ export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
   {
     accessorKey: 'phone',
     header: 'SDT',
+    enableSorting: false,
   },
 
   {
     accessorKey: 'status',
     header: 'Trạng thái',
+    enableSorting: false,
     cell: (info) => {
       const status = info.getValue<StudentStatus>();
 
