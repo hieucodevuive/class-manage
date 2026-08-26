@@ -4,7 +4,7 @@ import { SearchInput } from '../SearchInput';
 const Header = () => {
   return (
     <header className="flex h-15.5 items-center justify-between gap-2">
-      <SearchInput />
+      <SearchInput placeholder="Tìm kiếm học sinh, lớp học" />
       <AvatarMenu />
     </header>
   );

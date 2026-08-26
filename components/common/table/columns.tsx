@@ -9,6 +9,7 @@ export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
     accessorKey: 'name',
     header: 'Tên',
     sortFn: 'alphanumeric',
+    filterFn: 'includesString',
   },
 
   {

@@ -1,5 +1,9 @@
 'use client';
-import { RowSelectionState, useTable } from '@tanstack/react-table';
+import {
+  ColumnFiltersState,
+  RowSelectionState,
+  useTable,
+} from '@tanstack/react-table';
 import { features } from './features';
 import { ModuleType } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -20,6 +24,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SearchInput } from '../SearchInput';
 
 export const students: IStudent[] = [
   {
@@ -130,6 +135,7 @@ interface IDataTable {
 
 export default function DataTable({ moduleType }: IDataTable) {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 50,
@@ -141,7 +147,7 @@ export default function DataTable({ moduleType }: IDataTable) {
 
   const columns = useMemo(
     () => [selectionColumn, ...moduleColumns, actionsColumn],
-    [],
+    [moduleColumns, selectionColumn, actionsColumn],
   );
 
   const data = students;
@@ -153,15 +159,28 @@ export default function DataTable({ moduleType }: IDataTable) {
     data,
     onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
+    globalFilterFn: 'includesString',
     state: {
       rowSelection,
       pagination,
+      columnFilters,
     },
+    onColumnFiltersChange: setColumnFilters,
     getRowId: (row) => row.id,
   });
   return (
     <div className="bg-background w-full overflow-hidden rounded-xl border">
       {/* Search and filter */}
+      <div className="flex h-15 w-full items-center justify-between border-b px-4 py-4">
+        <SearchInput
+          className="max-w-80 bg-gray-50 text-[12px]!"
+          placeholder="Nhập tên học sinh"
+          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+          onChange={(e) =>
+            table.getColumn('name')?.setFilterValue(e.target.value)
+          }
+        />
+      </div>
 
       {/* Actions when slected item */}
       {Object.keys(rowSelection).length > 0 && (

@@ -6,6 +6,10 @@ import {
   createSortedRowModel,
   rowSortingFeature,
   sortFn_alphanumeric,
+  columnFilteringFeature,
+  globalFilteringFeature,
+  createFilteredRowModel,
+  filterFn_includesString,
 } from '@tanstack/react-table';
 
 export const features = tableFeatures({
@@ -13,8 +17,12 @@ export const features = tableFeatures({
   rowPaginationFeature,
   paginatedRowModel: createPaginatedRowModel(),
   rowSortingFeature, // enables sorting APIs and state
-  sortedRowModel: createSortedRowModel(), // client-side sorting
+  columnFilteringFeature,
+  globalFilteringFeature,
+  filteredRowModel: createFilteredRowModel(),
+  sortedRowModel: createSortedRowModel(),
   sortFns: {
     alphanumeric: sortFn_alphanumeric,
   },
+  filterFns: { includesString: filterFn_includesString },
 });
