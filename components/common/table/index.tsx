@@ -14,8 +14,9 @@ import {
   createSelectionColumn,
   tableColumns,
 } from './columns';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import CButton from '../CButton';
+
 import {
   ArrowDown,
   ArrowUp,
@@ -25,6 +26,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SearchInput } from '../SearchInput';
+import DataTableFilter from './DataTablePagination';
 
 export const students: IStudent[] = [
   {
@@ -135,59 +137,68 @@ interface IDataTable {
 
 export default function DataTable({ moduleType }: IDataTable) {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 50,
   });
 
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
   const moduleColumns = tableColumns[moduleType];
+
   const selectionColumn = createSelectionColumn<IStudent>();
   const actionsColumn = createActionsColumn<IStudent>();
 
-  const columns = useMemo(
-    () => [selectionColumn, ...moduleColumns, actionsColumn],
-    [moduleColumns, selectionColumn, actionsColumn],
-  );
+  const columns = [selectionColumn, ...moduleColumns, actionsColumn];
 
   const data = students;
 
   const table = useTable({
-    key: `${moduleType}-table`, // needed for devtools, omit if you don't want to use the devtools
+    key: `${moduleType}-table`,
     features,
     columns,
     data,
+
     onRowSelectionChange: setRowSelection,
+
     onPaginationChange: setPagination,
-    globalFilterFn: 'includesString',
+
     state: {
       rowSelection,
       pagination,
       columnFilters,
     },
+
     onColumnFiltersChange: setColumnFilters,
+
     getRowId: (row) => row.id,
   });
+
   return (
     <div className="bg-background w-full overflow-hidden rounded-xl border">
-      {/* Search and filter */}
+      {/* Search + Filter */}
       <div className="flex h-15 w-full items-center justify-between border-b px-4 py-4">
+        {/* Search name */}
         <SearchInput
           className="max-w-80 bg-gray-50 text-[12px]!"
           placeholder="Nhập tên học sinh"
           value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
-          onChange={(e) =>
-            table.getColumn('name')?.setFilterValue(e.target.value)
-          }
+          onChange={(e) => {
+            table.getColumn('name')?.setFilterValue(e.target.value);
+          }}
         />
+
+        <DataTableFilter table={table} columnFilters={columnFilters} />
       </div>
 
-      {/* Actions when slected item */}
+      {/* Selected actions */}
       {Object.keys(rowSelection).length > 0 && (
         <div className="flex h-10 w-full items-center justify-between bg-blue-100 px-4">
           <div className="text-[12px]">
             Chọn <strong>{Object.keys(rowSelection).length}</strong>
           </div>
+
           <div className="flex gap-2">
             <CButton
               text="Tạo Excel"
@@ -195,6 +206,7 @@ export default function DataTable({ moduleType }: IDataTable) {
               className="hover:none cursor-pointer text-[12px]"
               icon={<FileSpreadsheet />}
             />
+
             <CButton
               text="Xóa"
               variant="ghost"
@@ -209,50 +221,48 @@ export default function DataTable({ moduleType }: IDataTable) {
       <div className="w-full max-w-full overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-muted/40">
-            {table.getHeaderGroups().map((headerGroup) => {
-              return (
-                <tr key={headerGroup.id} className="border-b transition-colors">
-                  {headerGroup.headers.map((header) => {
-                    const sorted = header.column.getIsSorted();
-                    const canSort = header.column.getCanSort();
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id} className="border-b transition-colors">
+                {headerGroup.headers.map((header) => {
+                  const sorted = header.column.getIsSorted();
+                  const canSort = header.column.getCanSort();
 
-                    return (
-                      <th
-                        key={header.id}
-                        onClick={
-                          canSort
-                            ? header.column.getToggleSortingHandler()
-                            : undefined
-                        }
-                        className={cn(
-                          'text-muted-foreground h-11 px-4 text-left align-middle font-medium whitespace-nowrap',
-                          canSort &&
-                            'hover:bg-muted/60 cursor-pointer select-none',
-                        )}
-                      >
-                        {header.isPlaceholder ? null : (
-                          <div className="flex items-center gap-2">
-                            <table.FlexRender header={header} />
+                  return (
+                    <th
+                      key={header.id}
+                      onClick={
+                        canSort
+                          ? header.column.getToggleSortingHandler()
+                          : undefined
+                      }
+                      className={cn(
+                        'text-muted-foreground h-11 px-4 text-left align-middle font-medium whitespace-nowrap',
+                        canSort &&
+                          'hover:bg-muted/60 cursor-pointer select-none',
+                      )}
+                    >
+                      {header.isPlaceholder ? null : (
+                        <div className="flex items-center gap-2">
+                          <table.FlexRender header={header} />
 
-                            {canSort && (
-                              <span className="text-muted-foreground">
-                                {sorted === 'asc' ? (
-                                  <ArrowUp className="size-4" />
-                                ) : sorted === 'desc' ? (
-                                  <ArrowDown className="size-4" />
-                                ) : (
-                                  <ChevronsUpDown className="size-4 opacity-50" />
-                                )}
-                              </span>
-                            )}
-                          </div>
-                        )}
-                      </th>
-                    );
-                  })}
-                </tr>
-              );
-            })}
+                          {canSort && (
+                            <span className="text-muted-foreground">
+                              {sorted === 'asc' ? (
+                                <ArrowUp className="size-4" />
+                              ) : sorted === 'desc' ? (
+                                <ArrowDown className="size-4" />
+                              ) : (
+                                <ChevronsUpDown className="size-4 opacity-50" />
+                              )}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </th>
+                  );
+                })}
+              </tr>
+            ))}
           </thead>
 
           <tbody>

@@ -26,6 +26,18 @@ export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
   {
     accessorKey: 'grade',
     header: 'Khối',
+    enableColumnFilter: true,
+    filterFn: 'equals',
+    meta: {
+      filter: {
+        type: 'select',
+        options: [
+          { label: 'Khối 10', value: 10 },
+          { label: 'Khối 11', value: 11 },
+          { label: 'Khối 12', value: 12 },
+        ],
+      },
+    },
   },
 
   {
@@ -43,11 +55,22 @@ export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
     accessorKey: 'status',
     header: 'Trạng thái',
     enableSorting: false,
+    filterFn: 'equals',
     cell: (info) => {
       const status = info.getValue<StudentStatus>();
 
       return <span>{status === 'ACTIVE' ? 'Đang học' : 'Đã nghỉ'}</span>;
     },
+    meta: {
+      filter: {
+        type: 'select',
+        options: [
+          { label: 'Đang học', value: 'ACTIVE' },
+          { label: 'Đã nghỉ', value: 'INACTIVE' },
+        ],
+      },
+    },
+    enableColumnFilter: true,
   },
 ];
 

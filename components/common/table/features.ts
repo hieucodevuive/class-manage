@@ -10,6 +10,7 @@ import {
   globalFilteringFeature,
   createFilteredRowModel,
   filterFn_includesString,
+  filterFn_equals,
 } from '@tanstack/react-table';
 
 export const features = tableFeatures({
@@ -24,5 +25,8 @@ export const features = tableFeatures({
   sortFns: {
     alphanumeric: sortFn_alphanumeric,
   },
-  filterFns: { includesString: filterFn_includesString },
+  filterFns: {
+    includesString: filterFn_includesString,
+    equals: filterFn_equals,
+  },
 });
