@@ -8,8 +8,8 @@ import { Search } from 'lucide-react';
 interface ISearchInput {
   className?: string;
   placeholder: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function SearchInput({

@@ -1,6 +1,6 @@
 'use client';
 
-import { ColumnFiltersState, Table } from '@tanstack/react-table';
+import { ColumnFiltersState, RowData, Table } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 
@@ -19,18 +19,17 @@ import {
 } from '@/components/ui/select';
 
 import { ListFilter } from 'lucide-react';
-import { IStudent } from '@/types';
 import { features } from './features';
 
-interface IDataTableFilter {
-  table: Table<typeof features, IStudent>;
+interface IDataTableFilter<TData extends RowData> {
+  table: Table<typeof features, TData>;
   columnFilters: ColumnFiltersState;
 }
 
-export default function DataTableFilter({
+export default function DataTableFilter<TData extends RowData>({
   table,
   columnFilters,
-}: IDataTableFilter) {
+}: IDataTableFilter<TData>) {
   const filterableColumns = table
     .getAllLeafColumns()
     .filter((column) => column.columnDef.enableColumnFilter === true);
@@ -57,7 +56,7 @@ export default function DataTableFilter({
         Bộ lọc
       </PopoverTrigger>
 
-      <PopoverContent align="end" sideOffset={8} className="w-[340px] p-0">
+      <PopoverContent align="end" sideOffset={8} className="w-85 p-0">
         {/* Header */}
         <div className="border-b px-4 py-3.5">
           <div className="flex items-center justify-between">
@@ -78,7 +77,7 @@ export default function DataTableFilter({
         </div>
 
         {/* Filter fields */}
-        <div className="max-h-[360px] space-y-5 overflow-y-auto p-4">
+        <div className="max-h-90 space-y-5 overflow-y-auto p-4">
           {filterableColumns.map((column) => {
             const filter = column.columnDef.meta?.filter;
 

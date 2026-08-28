@@ -36,3 +36,46 @@ export interface IStudent {
 
   status: StudentStatus;
 }
+
+export enum ClassStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+  COMPLETED = 'COMPLETED',
+}
+
+export interface IClass {
+  id: string;
+
+  // Thông tin lớp
+  name: string;
+  code: string;
+  description?: string;
+
+  // Thông tin học tập
+  subject: string;
+  grade: number;
+
+  // Lịch học
+  schedule: string;
+  startDate: string;
+  endDate?: string;
+
+  // Học phí
+  pricePerSession: number;
+
+  // Sĩ số
+  maxStudents: number;
+  studentCount: number;
+
+  // Trạng thái
+  status: ClassStatus;
+}
+
+export type ModuleDataMap = {
+  [ModuleType.STUDENT]: IStudent;
+  [ModuleType.CLASS]: IClass;
+  // [ModuleType.PAYMENT]: IPayment;
+  // [ModuleType.DASHBOARD]: IDashboard;
+};
+
+export type ModuleTypeKey = keyof ModuleDataMap;
