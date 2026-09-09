@@ -1,6 +1,6 @@
 'use client';
 
-import { Eye, MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
+import { MoreHorizontal, Pencil, Trash2 } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -11,13 +11,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 interface DataTableActionsProps {
-  onView?: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
 }
 
 export default function DataTableActions({
-  onView,
   onEdit,
   onDelete,
 }: DataTableActionsProps) {
@@ -31,10 +29,10 @@ export default function DataTableActions({
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-40">
-        <DropdownMenuItem onClick={onView}>
+        {/* <DropdownMenuItem onClick={onView}>
           <Eye className="mr-2 h-4 w-4" />
           Xem
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
 
         <DropdownMenuItem onClick={onEdit}>
           <Pencil className="mr-2 h-4 w-4" />

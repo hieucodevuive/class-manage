@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/sheet';
 import { useAppStore } from '@/stores';
 import StudentDetailPanel from '@/app/(main)/students/StudentDetailPage';
+import ClassDetailPanel from '@/app/(main)/classes/ClassDetailPage';
 
 export default function DetailPanel() {
   const { moduleType, isOpenDetail, itemId, closePanel } = useAppStore();
@@ -23,7 +24,7 @@ export default function DetailPanel() {
         return <StudentDetailPanel itemId={itemId} />;
 
       case ModuleType.CLASS:
-        return <div>Class ID: {itemId}</div>;
+        return <ClassDetailPanel itemId={itemId} />;
 
       case ModuleType.PAYMENT:
         return <div>Payment ID: {itemId}</div>;

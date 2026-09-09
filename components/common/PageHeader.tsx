@@ -1,7 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { FileSpreadsheet, UserPlus } from 'lucide-react';
+import {
+  FileSpreadsheet,
+  UserPlus,
+  CircleDollarSign,
+  Plus,
+} from 'lucide-react';
 
 import CButton from './CButton';
 import { CSelect } from './CSelect';
@@ -18,6 +23,21 @@ interface IPageHeader {
   subTitle: string;
   moduleType?: ModuleType;
 }
+
+const moduleActions = {
+  [ModuleType.STUDENT]: {
+    label: 'Thêm học sinh',
+    icon: <UserPlus />,
+  },
+  [ModuleType.CLASS]: {
+    label: 'Thêm lớp học',
+    icon: <Plus />,
+  },
+  [ModuleType.PAYMENT]: {
+    label: 'Tạo thanh toán',
+    icon: <CircleDollarSign />,
+  },
+} as const;
 
 export default function PageHeader({
   title,
@@ -50,8 +70,11 @@ export default function PageHeader({
           />
         )}
         <CButton text="Tạo file Excel" icon={<FileSpreadsheet />} />
-        {moduleType !== ModuleType.DASHBOARD && (
-          <CButton text="Thêm học sinh" icon={<UserPlus />} />
+        {moduleType && moduleType !== ModuleType.DASHBOARD && (
+          <CButton
+            text={moduleActions[moduleType].label}
+            icon={moduleActions[moduleType].icon}
+          />
         )}
       </div>
     </div>

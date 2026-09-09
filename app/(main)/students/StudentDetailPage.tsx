@@ -4,7 +4,6 @@ import {
   CalendarDays,
   GraduationCap,
   History,
-  MoreHorizontal,
   Pencil,
   Phone,
   School,

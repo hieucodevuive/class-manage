@@ -93,6 +93,11 @@ export const classColumns: Array<ColumnDef<typeof features, IClass>> = [
     header: 'Tên lớp',
     sortFn: 'alphanumeric',
     filterFn: 'includesString',
+    cell: ({ row }) => (
+      <PanelLink moduleType={ModuleType.CLASS} id={row.original.id}>
+        {row.original.name}
+      </PanelLink>
+    ),
   },
 
   {
@@ -337,9 +342,6 @@ export function createActionsColumn<TData extends RowData>(): ColumnDef<
 
       return (
         <DataTableActions
-          onView={() => {
-            console.log('View:', data);
-          }}
           onEdit={() => {
             console.log('Edit:', data);
           }}
