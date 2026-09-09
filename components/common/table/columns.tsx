@@ -10,6 +10,7 @@ import { features } from './features';
 import type { ColumnDef, RowData } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import DataTableActions from './DataTableActions';
+import PanelLink from '../PanelLink';
 
 export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
   {
@@ -17,6 +18,11 @@ export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
     header: 'Tên',
     sortFn: 'alphanumeric',
     filterFn: 'includesString',
+    cell: ({ row }) => (
+      <PanelLink moduleType={ModuleType.STUDENT} id={row.original.id}>
+        {row.original.name}
+      </PanelLink>
+    ),
   },
 
   {

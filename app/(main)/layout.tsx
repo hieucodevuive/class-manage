@@ -1,3 +1,4 @@
+import DetailPanel from '@/components/common/DetailPanel';
 import { CBreadCrumb } from '@/components/common/layout/CBreadCrumb';
 import Header from '@/components/common/layout/Header';
 import MainNav from '@/components/common/layout/MainNav';
@@ -14,6 +15,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </div>
       </SidebarProvider>
+      <DetailPanel />
     </div>
   );
 };
