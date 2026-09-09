@@ -194,8 +194,19 @@ export const paymentColumns: Array<ColumnDef<typeof features, IPayment>> = [
   {
     accessorKey: 'className',
     header: 'Lớp',
-    sortFn: 'alphanumeric',
     enableSorting: false,
+    enableColumnFilter: true,
+    filterFn: 'equals',
+    meta: {
+      filter: {
+        type: 'select',
+        options: [
+          { label: 'Lớp Văn 10A', value: 'Ngữ văn 10A' },
+          { label: 'Lớp Văn 11A', value: 'Lớp Văn 11A' },
+          { label: 'Lớp Văn 12A', value: 'Lớp Văn 12A' },
+        ],
+      },
+    },
   },
 
   {
@@ -219,6 +230,7 @@ export const paymentColumns: Array<ColumnDef<typeof features, IPayment>> = [
   {
     id: 'totalAmount',
     header: 'Tổng tiền',
+    accessorFn: (row) => row.pricePerSession * row.sessionCount,
     cell: ({ row }) => {
       const pricePerSession = row.original.pricePerSession;
       const sessionCount = row.original.sessionCount;
@@ -242,6 +254,11 @@ export const paymentColumns: Array<ColumnDef<typeof features, IPayment>> = [
   {
     id: 'remainingAmount',
     header: 'Còn nợ',
+    accessorFn: (row) => {
+      const totalAmount = row.pricePerSession * row.sessionCount;
+
+      return totalAmount - row.paidAmount;
+    },
     cell: ({ row }) => {
       const { pricePerSession, sessionCount, paidAmount } = row.original;
 
