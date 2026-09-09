@@ -15,9 +15,8 @@ export const tableConfig = {
     searchColumn: 'studentName',
     searchPlaceholder: 'Nhập tên học sinh',
   },
-
-  [ModuleType.DASHBOARD]: {
-    searchColumn: 'name',
-    searchPlaceholder: 'Tìm kiếm',
-  },
+  // [ModuleType.DASHBOARD]: {
+  //   searchColumn: 'name',
+  //   searchPlaceholder: 'Tìm kiếm',
+  // },
 } as const;

@@ -1,6 +1,7 @@
 import {
   ClassStatus,
   IClass,
+  IPayment,
   IStudent,
   ModuleType,
   StudentStatus,
@@ -176,11 +177,100 @@ export const classColumns: Array<ColumnDef<typeof features, IClass>> = [
   },
 ];
 
+export const paymentColumns: Array<ColumnDef<typeof features, IPayment>> = [
+  {
+    accessorKey: 'studentName',
+    header: 'Học sinh',
+    sortFn: 'alphanumeric',
+    filterFn: 'includesString',
+  },
+
+  {
+    accessorKey: 'className',
+    header: 'Lớp',
+    sortFn: 'alphanumeric',
+    enableSorting: false,
+  },
+
+  {
+    accessorKey: 'pricePerSession',
+    header: 'Giá / buổi',
+    cell: (info) => {
+      const price = info.getValue<number>();
+
+      return `${price.toLocaleString('vi-VN')}đ`;
+    },
+  },
+
+  {
+    accessorKey: 'sessionCount',
+    header: 'Số buổi',
+    cell: (info) => {
+      return `${info.getValue<number>()} buổi`;
+    },
+  },
+
+  {
+    id: 'totalAmount',
+    header: 'Tổng tiền',
+    cell: ({ row }) => {
+      const pricePerSession = row.original.pricePerSession;
+      const sessionCount = row.original.sessionCount;
+
+      const amount = pricePerSession * sessionCount;
+
+      return `${amount.toLocaleString('vi-VN')}đ`;
+    },
+  },
+
+  {
+    accessorKey: 'paidAmount',
+    header: 'Đã đóng',
+    cell: (info) => {
+      const amount = info.getValue<number>();
+
+      return `${amount.toLocaleString('vi-VN')}đ`;
+    },
+  },
+
+  {
+    id: 'remainingAmount',
+    header: 'Còn nợ',
+    cell: ({ row }) => {
+      const { pricePerSession, sessionCount, paidAmount } = row.original;
+
+      const totalAmount = pricePerSession * sessionCount;
+      const remainingAmount = totalAmount - paidAmount;
+
+      return (
+        <span
+          className={remainingAmount > 0 ? 'text-red-500' : 'text-green-600'}
+        >
+          {remainingAmount.toLocaleString('vi-VN')}đ
+        </span>
+      );
+    },
+  },
+
+  {
+    accessorKey: 'paymentDate',
+    header: 'Ngày thanh toán',
+    enableSorting: false,
+    cell: (info) => {
+      const value = info.getValue<string | undefined>();
+
+      if (!value) return '-';
+
+      return new Date(value).toLocaleDateString('vi-VN');
+    },
+  },
+];
+
 export const tableColumns = {
   [ModuleType.STUDENT]: studentColumns,
   [ModuleType.CLASS]: classColumns,
-  [ModuleType.PAYMENT]: studentColumns,
-  [ModuleType.DASHBOARD]: studentColumns,
+  [ModuleType.PAYMENT]: paymentColumns,
+  // [ModuleType.DASHBOARD]: studentColumns,
 } as const;
 
 export function createSelectionColumn<TData extends RowData>(): ColumnDef<

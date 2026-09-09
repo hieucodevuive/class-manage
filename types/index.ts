@@ -71,10 +71,27 @@ export interface IClass {
   status: ClassStatus;
 }
 
+export interface IPayment {
+  id: string;
+
+  studentId: string;
+  studentName: string;
+
+  classId: string;
+  className: string;
+
+  pricePerSession: number;
+  sessionCount: number;
+  paidAmount: number;
+
+  paymentDate?: string;
+  note?: string;
+}
+
 export type ModuleDataMap = {
   [ModuleType.STUDENT]: IStudent;
   [ModuleType.CLASS]: IClass;
-  // [ModuleType.PAYMENT]: IPayment;
+  [ModuleType.PAYMENT]: IPayment;
   // [ModuleType.DASHBOARD]: IDashboard;
 };
 
