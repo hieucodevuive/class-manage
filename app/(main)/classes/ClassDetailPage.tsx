@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react';
 import { Users, CalendarDays, Banknote, Pencil, Trash2 } from 'lucide-react';
 import { ModuleType } from '@/types';
-import { useAppStore } from '@/stores';
 import PanelLink from '@/components/common/PanelLink';
+import { redirect } from 'next/navigation';
+import CButton from '@/components/common/CButton';
+import { useAppStore } from '@/stores';
 
 interface IClassStudent {
   id: string;
@@ -27,7 +29,7 @@ interface IClassDetailPanelProps {
 }
 
 export default function ClassDetailPanel({ itemId }: IClassDetailPanelProps) {
-  const { openPanel } = useAppStore();
+  const { closePanel } = useAppStore();
   const [classDetail, setClassDetail] = useState<IClassDetail | null>(null);
 
   useEffect(() => {
@@ -132,15 +134,23 @@ export default function ClassDetailPanel({ itemId }: IClassDetailPanelProps) {
 
       {/* Actions */}
       <div className="flex gap-2">
-        <button className="flex items-center gap-2 rounded-md border px-3 py-2 text-sm">
-          <Pencil className="size-4" />
-          Chỉnh sửa
-        </button>
+        <CButton
+          text={'Chỉnh sửa'}
+          icon={<Pencil />}
+          onClick={() => {
+            closePanel();
+            redirect(`/classes/edit/${classDetail.id}`);
+          }}
+        />
 
-        <button className="text-destructive flex items-center gap-2 rounded-md border px-3 py-2 text-sm">
-          <Trash2 className="size-4" />
-          Xóa lớp
-        </button>
+        <CButton
+          text={'Xóa lớp'}
+          icon={<Trash2 />}
+          variant="destructive"
+          onClick={() => {
+            // Implementation for deleting class
+          }}
+        />
       </div>
 
       {/* Students */}

@@ -11,6 +11,7 @@ import type { ColumnDef, RowData } from '@tanstack/react-table';
 import { Checkbox } from '@/components/ui/checkbox';
 import DataTableActions from './DataTableActions';
 import PanelLink from '../PanelLink';
+import { redirect } from 'next/navigation';
 
 export const studentColumns: Array<ColumnDef<typeof features, IStudent>> = [
   {
@@ -330,10 +331,9 @@ export function createSelectionColumn<TData extends RowData>(): ColumnDef<
   };
 }
 
-export function createActionsColumn<TData extends RowData>(): ColumnDef<
-  typeof features,
-  TData
-> {
+export function createActionsColumn<
+  TData extends RowData & { id: string },
+>(): ColumnDef<typeof features, TData> {
   return {
     id: 'actions',
     header: 'Thao tác',
@@ -343,7 +343,7 @@ export function createActionsColumn<TData extends RowData>(): ColumnDef<
       return (
         <DataTableActions
           onEdit={() => {
-            console.log('Edit:', data);
+            redirect(`/classes/edit/${data.id}`);
           }}
           onDelete={() => {
             console.log('Delete:', data);

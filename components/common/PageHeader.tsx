@@ -11,6 +11,7 @@ import {
 import CButton from './CButton';
 import { CSelect } from './CSelect';
 import { ModuleType } from '@/types';
+import { redirect } from 'next/navigation';
 
 const times = [
   { label: '30 ngày', value: '1' },
@@ -22,20 +23,30 @@ interface IPageHeader {
   title: string;
   subTitle: string;
   moduleType?: ModuleType;
+  noActions?: boolean;
 }
 
 const moduleActions = {
   [ModuleType.STUDENT]: {
     label: 'Thêm học sinh',
     icon: <UserPlus />,
+    onClick: () => {
+      redirect('/classes/create');
+    },
   },
   [ModuleType.CLASS]: {
     label: 'Thêm lớp học',
     icon: <Plus />,
+    onClick: () => {
+      redirect('/classes/create');
+    },
   },
   [ModuleType.PAYMENT]: {
     label: 'Tạo thanh toán',
     icon: <CircleDollarSign />,
+    onClick: () => {
+      redirect('/classes/create');
+    },
   },
 } as const;
 
@@ -43,6 +54,7 @@ export default function PageHeader({
   title,
   subTitle,
   moduleType,
+  noActions,
 }: IPageHeader) {
   const [time, setTime] = useState<string | null>('1');
 
@@ -60,23 +72,26 @@ export default function PageHeader({
         <span className="text-muted-foreground text-sm">{subTitle}</span>
       </div>
 
-      <div className="flex items-center gap-2">
-        {moduleType === ModuleType.DASHBOARD && (
-          <CSelect
-            items={times}
-            value={time ?? ''}
-            onValueChange={handleTimeChange}
-            className="w-32"
-          />
-        )}
-        <CButton text="Tạo file Excel" icon={<FileSpreadsheet />} />
-        {moduleType && moduleType !== ModuleType.DASHBOARD && (
-          <CButton
-            text={moduleActions[moduleType].label}
-            icon={moduleActions[moduleType].icon}
-          />
-        )}
-      </div>
+      {!noActions && (
+        <div className="flex items-center gap-2">
+          {moduleType === ModuleType.DASHBOARD && (
+            <CSelect
+              items={times}
+              value={time ?? ''}
+              onValueChange={handleTimeChange}
+              className="w-32"
+            />
+          )}
+          <CButton text="Tạo file Excel" icon={<FileSpreadsheet />} />
+          {moduleType && moduleType !== ModuleType.DASHBOARD && (
+            <CButton
+              text={moduleActions[moduleType].label}
+              icon={moduleActions[moduleType].icon}
+              onClick={moduleActions[moduleType].onClick}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

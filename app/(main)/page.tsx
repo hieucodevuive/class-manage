@@ -20,7 +20,7 @@ const quickActions = [
     moduleType: ModuleType.STUDENT,
   },
   {
-    href: '/dashboard/classes',
+    href: '/classes/create',
     text: 'Thêm lớp học',
     icon: <BookOpen className="h-5 w-5" />,
     moduleType: ModuleType.CLASS,
