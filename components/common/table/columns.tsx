@@ -3,7 +3,6 @@ import {
   IClass,
   IPayment,
   IStudent,
-  ModuleDataMap,
   ModuleType,
   StudentStatus,
 } from '@/types';

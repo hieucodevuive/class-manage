@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Users, CalendarDays, Banknote, Pencil, Trash2 } from 'lucide-react';
 import { ModuleType } from '@/types';
 import PanelLink from '@/components/common/PanelLink';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import CButton from '@/components/common/CButton';
 import { useAppStore } from '@/stores';
 
@@ -29,6 +29,7 @@ interface IClassDetailPanelProps {
 }
 
 export default function ClassDetailPanel({ itemId }: IClassDetailPanelProps) {
+  const router = useRouter();
   const { closePanel } = useAppStore();
   const [classDetail, setClassDetail] = useState<IClassDetail | null>(null);
 
@@ -139,7 +140,7 @@ export default function ClassDetailPanel({ itemId }: IClassDetailPanelProps) {
           icon={<Pencil />}
           onClick={() => {
             closePanel();
-            redirect(`/classes/edit/${classDetail.id}`);
+            router.push(`/classes/edit/${classDetail.id}`);
           }}
         />
 

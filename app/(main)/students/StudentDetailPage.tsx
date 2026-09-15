@@ -17,8 +17,8 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { students } from './page';
 import CButton from '@/components/common/CButton';
-import { redirect } from 'next/navigation';
 import { useAppStore } from '@/stores';
+import { useRouter } from 'next/navigation';
 
 interface IStudentDetailPanel {
   itemId: string;
@@ -52,6 +52,7 @@ const paymentHistory = [
 ];
 
 export default function StudentDetailPanel({ itemId }: IStudentDetailPanel) {
+  const router = useRouter();
   const { closePanel } = useAppStore();
   const student = students.find((item) => item.id === itemId);
 
@@ -101,7 +102,7 @@ export default function StudentDetailPanel({ itemId }: IStudentDetailPanel) {
           icon={<Pencil />}
           onClick={() => {
             closePanel();
-            redirect(`/students/edit/${student.id}`);
+            router.push(`/students/edit/${student.id}`);
           }}
         />
 
