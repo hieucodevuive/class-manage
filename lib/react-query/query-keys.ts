@@ -8,4 +8,7 @@ export const QUERY_KEYS = {
       params,
     ],
   },
+  CLASSES: {
+    ALL: ['classes'],
+  },
 };

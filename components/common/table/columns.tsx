@@ -3,6 +3,7 @@ import {
   IClass,
   IPayment,
   IStudent,
+  ModuleDataMap,
   ModuleType,
   StudentStatus,
 } from '@/types';
@@ -331,9 +332,9 @@ export function createSelectionColumn<TData extends RowData>(): ColumnDef<
   };
 }
 
-export function createActionsColumn<
-  TData extends RowData & { id: string },
->(): ColumnDef<typeof features, TData> {
+export function createActionsColumn<TData extends RowData & { id: string }>(
+  moduleType: ModuleType,
+): ColumnDef<typeof features, TData> {
   return {
     id: 'actions',
     header: 'Thao tác',
@@ -343,7 +344,19 @@ export function createActionsColumn<
       return (
         <DataTableActions
           onEdit={() => {
-            redirect(`/classes/edit/${data.id}`);
+            switch (moduleType) {
+              case ModuleType.STUDENT:
+                redirect(`/students/edit/${data.id}`);
+                break;
+
+              case ModuleType.CLASS:
+                redirect(`/classes/edit/${data.id}`);
+                break;
+
+              case ModuleType.PAYMENT:
+                redirect(`/payments/edit/${data.id}`);
+                break;
+            }
           }}
           onDelete={() => {
             console.log('Delete:', data);

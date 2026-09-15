@@ -31,7 +31,7 @@ const moduleActions = {
     label: 'Thêm học sinh',
     icon: <UserPlus />,
     onClick: () => {
-      redirect('/classes/create');
+      redirect('/students/create');
     },
   },
   [ModuleType.CLASS]: {
@@ -45,7 +45,7 @@ const moduleActions = {
     label: 'Tạo thanh toán',
     icon: <CircleDollarSign />,
     onClick: () => {
-      redirect('/classes/create');
+      redirect('/payments/create');
     },
   },
 } as const;

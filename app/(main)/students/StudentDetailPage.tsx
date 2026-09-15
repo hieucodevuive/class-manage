@@ -16,6 +16,9 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { students } from './page';
+import CButton from '@/components/common/CButton';
+import { redirect } from 'next/navigation';
+import { useAppStore } from '@/stores';
 
 interface IStudentDetailPanel {
   itemId: string;
@@ -49,6 +52,7 @@ const paymentHistory = [
 ];
 
 export default function StudentDetailPanel({ itemId }: IStudentDetailPanel) {
+  const { closePanel } = useAppStore();
   const student = students.find((item) => item.id === itemId);
 
   if (!student) {
@@ -92,10 +96,14 @@ export default function StudentDetailPanel({ itemId }: IStudentDetailPanel) {
 
       {/* Actions */}
       <div className="flex gap-2">
-        <Button variant="default" size="sm" className="flex-1">
-          <Pencil className="mr-2 size-4" />
-          Chỉnh sửa
-        </Button>
+        <CButton
+          text={'Chỉnh sửa'}
+          icon={<Pencil />}
+          onClick={() => {
+            closePanel();
+            redirect(`/students/edit/${student.id}`);
+          }}
+        />
 
         <Button
           variant="outline"

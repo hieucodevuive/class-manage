@@ -46,7 +46,7 @@ export default function DataTable<T extends keyof ModuleDataMap>({
   const moduleColumns = getTableColumns(moduleType);
 
   const selectionColumn = createSelectionColumn<ModuleDataMap[T]>();
-  const actionsColumn = createActionsColumn<ModuleDataMap[T]>();
+  const actionsColumn = createActionsColumn<ModuleDataMap[T]>(moduleType);
 
   const columns = [selectionColumn, ...moduleColumns, actionsColumn];
 

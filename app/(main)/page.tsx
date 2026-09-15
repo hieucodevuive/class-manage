@@ -14,7 +14,7 @@ import {
 
 const quickActions = [
   {
-    href: '/dashboard/students',
+    href: '/students/create',
     text: 'Thêm học sinh',
     icon: <UserPlus className="h-5 w-5" />,
     moduleType: ModuleType.STUDENT,
@@ -26,7 +26,7 @@ const quickActions = [
     moduleType: ModuleType.CLASS,
   },
   {
-    href: '/dashboard/payments',
+    href: '/payments/create',
     text: 'Thêm thanh toán',
     icon: <CreditCard className="h-5 w-5" />,
     moduleType: ModuleType.PAYMENT,

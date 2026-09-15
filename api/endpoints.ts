@@ -13,4 +13,11 @@ export const API_ENDPOINTS = {
     UPDATE: (id: string) => `/users/${id}`,
     DELETE: (id: string) => `/users/${id}`,
   },
+  CLASSES: {
+    LIST: '/classes',
+    DETAIL: (id: string) => `/classes/${id}`,
+    CREATE: '/classes',
+    UPDATE: (id: string) => `/classes/${id}`,
+    DELETE: (id: string) => `/classes/${id}`,
+  },
 } as const;
