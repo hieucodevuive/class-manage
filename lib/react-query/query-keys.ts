@@ -11,4 +11,7 @@ export const QUERY_KEYS = {
   CLASSES: {
     ALL: ['classes'],
   },
+  STUDENTS: {
+    ALL: ['students'],
+  },
 };

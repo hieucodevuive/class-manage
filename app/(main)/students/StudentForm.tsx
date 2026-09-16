@@ -115,10 +115,6 @@ export default function StudentForm({ mode, studentId }: StudentFormProps) {
     name: 'classId',
   });
 
-  /* ------------------------------------------------------------------------ */
-  /*                              Edit: Load student                          */
-  /* ------------------------------------------------------------------------ */
-
   useEffect(() => {
     if (mode !== 'edit' || !studentId) {
       return;
@@ -136,10 +132,6 @@ export default function StudentForm({ mode, studentId }: StudentFormProps) {
 
     fetchStudent();
   }, [mode, studentId, form]);
-
-  /* ------------------------------------------------------------------------ */
-  /*                                   Submit                                 */
-  /* ------------------------------------------------------------------------ */
 
   const onSubmit = (values: StudentFormValues) => {
     if (mode === 'create') {
@@ -160,10 +152,6 @@ export default function StudentForm({ mode, studentId }: StudentFormProps) {
 
     console.log('Update student:', payload);
   };
-
-  /* ------------------------------------------------------------------------ */
-  /*                                    Render                                */
-  /* ------------------------------------------------------------------------ */
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
@@ -303,7 +291,9 @@ export default function StudentForm({ mode, studentId }: StudentFormProps) {
                         ? 'Đang tải danh sách lớp...'
                         : 'Chọn lớp học'
                     }
-                  />
+                  >
+                    {classes?.find((item) => item.id === classId)?.name}
+                  </SelectValue>
                 </SelectTrigger>
 
                 <SelectContent>
@@ -329,7 +319,7 @@ export default function StudentForm({ mode, studentId }: StudentFormProps) {
         {/* Actions */}
         <div className="flex justify-end gap-2 border-t px-5 py-4">
           <Button type="button" variant="outline" onClick={() => form.reset()}>
-            Hủy
+            Xóa
           </Button>
 
           <Button type="submit" disabled={form.formState.isSubmitting}>
@@ -340,10 +330,6 @@ export default function StudentForm({ mode, studentId }: StudentFormProps) {
     </form>
   );
 }
-
-/* -------------------------------------------------------------------------- */
-/*                                Fake API                                    */
-/* -------------------------------------------------------------------------- */
 
 const getStudentById = async (
   studentId: string,

@@ -78,4 +78,61 @@ export const handlers = [
       },
     ]);
   }),
+
+  http.get(`${process.env.NEXT_PUBLIC_API_URL}/students`, async () => {
+    await delay(2000);
+
+    return HttpResponse.json([
+      {
+        id: 'ST001',
+        name: 'Nguyễn Văn An',
+        school: 'THPT Nguyễn Du',
+        grade: 10,
+        parentName: 'Nguyễn Văn Bình',
+        phone: '0912345678',
+        classId: 'CL001',
+        status: 'ACTIVE',
+      },
+      {
+        id: 'ST002',
+        name: 'Trần Thị Mai',
+        school: 'THPT Lê Quý Đôn',
+        grade: 10,
+        parentName: 'Trần Văn Minh',
+        phone: '0987654321',
+        classId: 'CL001',
+        status: 'ACTIVE',
+      },
+      {
+        id: 'ST003',
+        name: 'Lê Hoàng Nam',
+        school: 'THPT Nguyễn Trãi',
+        grade: 11,
+        parentName: 'Lê Văn Hoàng',
+        phone: '0901234567',
+        classId: 'CL002',
+        status: 'ACTIVE',
+      },
+      {
+        id: 'ST004',
+        name: 'Phạm Ngọc Anh',
+        school: 'THPT Chu Văn An',
+        grade: 11,
+        parentName: 'Phạm Văn Hùng',
+        phone: '0934567890',
+        classId: 'CL002',
+        status: 'ACTIVE',
+      },
+      {
+        id: 'ST005',
+        name: 'Đỗ Minh Đức',
+        school: 'THPT Kim Liên',
+        grade: 12,
+        parentName: 'Đỗ Văn Nam',
+        phone: '0978123456',
+        classId: 'CL003',
+        status: 'ACTIVE',
+      },
+    ]);
+  }),
 ];

@@ -20,4 +20,8 @@ export const API_ENDPOINTS = {
     UPDATE: (id: string) => `/classes/${id}`,
     DELETE: (id: string) => `/classes/${id}`,
   },
+  STUDENTS: {
+    LIST: '/students',
+    DETAIL: (id: string) => `/students/${id}`,
+  },
 } as const;

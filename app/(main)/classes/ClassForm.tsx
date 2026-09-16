@@ -318,7 +318,7 @@ export default function ClassForm({ mode, classId }: ClassFormProps) {
         {/* Actions */}
         <div className="flex justify-end gap-2 border-t px-5 py-4">
           <Button type="button" variant="outline" onClick={() => form.reset()}>
-            Hủy
+            Xóa
           </Button>
 
           <Button type="submit">
