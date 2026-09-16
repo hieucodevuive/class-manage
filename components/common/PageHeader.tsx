@@ -65,7 +65,7 @@ export default function PageHeader({
   };
 
   return (
-    <div className="flex h-18 w-full items-center justify-between">
+    <div className="mt-2 mb-4 flex w-full flex-col justify-between gap-4 lg:mt-0 lg:mb-0 lg:h-18 lg:flex-row lg:items-center">
       <div className="flex flex-col">
         <h2 className="text-xl font-semibold text-black">{title}</h2>
 
